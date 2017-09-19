@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>demo-fusionclust</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">demo-fusionclust</h1>
+
+
+
+<p>This <code>vignette</code> provides a quick demo of the functionalities of the <code>fusionclust</code> package.</p>
+<div id="example-1---track-the-big-merges-and-estimate-the-number-of-clusters" class="section level2">
+<h2>Example 1 - track the big merges and estimate the number of clusters</h2>
+<p>This example demonstrates how to estimate the number of clusters using <code>bmt</code> and <code>nclust</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Generate bimodal data</span>
+<span class="kw">set.seed</span>(<span class="dv">42</span>)
+x&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rnorm</span>(<span class="dv">1000</span>,-<span class="dv">2</span>,<span class="dv">1</span>), <span class="kw">rnorm</span>(<span class="dv">1000</span>,<span class="dv">2</span>,<span class="dv">1</span>))
+
+<span class="co"># Run Big Merge Tracker on x</span>
+<span class="kw">library</span>(<span class="st">&quot;fusionclust&quot;</span>)
+bmt_output&lt;-<span class="kw">bmt</span>(x)</code></pre></div>
+<pre><code>## [1] &quot;BEWARE: there is a big merge when total no. of clusters are  51&quot;</code></pre>
+<p>Now, estimate the number of clusters.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Estimate the number of clusters - k</span>
+k&lt;-<span class="st"> </span><span class="kw">nclust</span>(bmt_output)
+k</code></pre></div>
+<pre><code>## [1] 2</code></pre>
+</div>
+<div id="example-2---rank-and-screen-the-p-features-in-a-clustering-problem" class="section level2">
+<h2>Example 2 - rank and screen the p features in a clustering problem</h2>
+<p>This example demonstrates feature ranking and screening using <code>cosci_is</code> and <code>cosci_is_select</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Generate n by p=50 design matrix with 2 signals and 48 noise features</span>
+n&lt;-<span class="dv">1000</span>
+features&lt;-<span class="dv">1</span>:<span class="dv">50</span>
+<span class="kw">set.seed</span>(<span class="dv">42</span>)
+noise&lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>(<span class="dv">48000</span>,<span class="dv">0</span>,<span class="dv">1</span>),<span class="dt">nrow=</span><span class="dv">1000</span>,<span class="dt">ncol=</span><span class="dv">48</span>)
+
+<span class="co"># signal 1 ~ mixture of Normals</span>
+<span class="kw">set.seed</span>(<span class="dv">42</span>)
+s1&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rnorm</span>(n/<span class="dv">2</span>,-<span class="fl">1.5</span>,<span class="dv">1</span>),<span class="kw">rnorm</span>(n/<span class="dv">2</span>,<span class="fl">1.5</span>,<span class="dv">1</span>))
+
+<span class="co"># signal 2 ~ mixture of Log Normal and Normal</span>
+<span class="kw">set.seed</span>(<span class="dv">42</span>)
+s2&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rlnorm</span>(n/<span class="dv">2</span>,<span class="fl">0.2</span>,<span class="fl">0.35</span>),<span class="kw">rnorm</span>(n/<span class="dv">2</span>,<span class="dv">4</span>,<span class="fl">0.5</span>))
+
+<span class="co"># put it all together</span>
+x&lt;-<span class="st"> </span><span class="kw">cbind</span>(s1,s2,noise)</code></pre></div>
+<p>Now, conduct feature ranking using <code>cosci_is</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;fusionclust&quot;</span>)
+scores&lt;-<span class="st"> </span><span class="kw">cosci_is</span>(x,<span class="dv">0</span>)
+
+<span class="co"># plot the scores and see which features have higher scores</span>
+<span class="kw">plot</span>(features,scores,<span class="dt">type=</span><span class="st">&quot;p&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<p>Screen out the noise features using <code>cosci_is_select</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">features&lt;-<span class="kw">cosci_is_select</span>(scores,<span class="fl">0.9</span>)
+features$selected</code></pre></div>
+<pre><code>## [1]  1  2  5 37 41</code></pre>
+<p>You can also get an implicit threshold value.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp.thresh&lt;-<span class="st"> </span><span class="kw">min</span>(scores[features$selected])
+imp.thresh</code></pre></div>
+<pre><code>## [1] 0.143</code></pre>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

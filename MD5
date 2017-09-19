@@ -1,0 +1,15 @@
+b56e099d2f75d3e3eb5c2c09390af24b *DESCRIPTION
+f190c29be0bb91e21a7ae1bb66e0f6a2 *NAMESPACE
+eae1953a982cb078db3162ec764a2d99 *NEWS.md
+12cba0edc3324ef6d639317450744bd0 *R/bmt.R
+46f2d7da8383f5c6c8f9abaaa7b01078 *R/coscilibrary.R
+fd337245bfb4b461a3a49a48c40ddc0b *R/nclust.R
+5deb1718b85df8539d1d2ba60c5b4eb3 *build/vignette.rds
+d85ec6045d666a04d2336fb4950e9c0b *inst/doc/demo-fusionclust.R
+b25a61bb02f75e44b70f8da0e7e214af *inst/doc/demo-fusionclust.Rmd
+247f35e12ca8a954c620abdc4333d1f4 *inst/doc/demo-fusionclust.html
+c2980aca1ae29e888375bfddd0cf6d88 *man/bmt.Rd
+c1ccd5ad55973c4f12bba994e592e4ec *man/cosci_is.Rd
+e24a8c423e134b988c5c8a195ad41276 *man/cosci_is_select.Rd
+cb64f5a622d0b2dab43ce5bdb087a09d *man/nclust.Rd
+b25a61bb02f75e44b70f8da0e7e214af *vignettes/demo-fusionclust.Rmd
